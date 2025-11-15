@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Data files (large datasets)
+archive/
+*.h5
+*.hdf5
+*.csv
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files (can be large)
+*.pth
+*.pt
+*.ckpt
+*.pkl
+*.pickle
+
+# Logs
+*.log
+logs/
+
