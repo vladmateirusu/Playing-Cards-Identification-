@@ -8,9 +8,10 @@ from torchvision.datasets import ImageFolder
 import timm
 
 import matplotlib.pyplot as plt # For data viz
-import pandas as pd
+import pandas as pd 
 import numpy as np
 import sys
+import os
 from tqdm.notebook import tqdm
 
 print('System Version:', sys.version)
@@ -33,4 +34,10 @@ class PlayingCardDataset(Dataset):
     def classes(self):
         return self.data.classes
 
-        
+trainDataset = PlayingCardDataset(
+    data_dir='archive/train'
+)  
+
+data_dir = 'archive/train'
+target_to_class = {v: k for k, v in ImageFolder(data_dir).class_to_idx.items()}
+print(target_to_class)
