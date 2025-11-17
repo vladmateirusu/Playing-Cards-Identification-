@@ -34,10 +34,31 @@ class PlayingCardDataset(Dataset):
     def classes(self):
         return self.data.classes
 
-trainDataset = PlayingCardDataset(
-    data_dir='archive/train'
-)  
-
 data_dir = 'archive/train'
+
+
 target_to_class = {v: k for k, v in ImageFolder(data_dir).class_to_idx.items()}
-print(target_to_class)
+
+transform = transforms.Compose([
+    transforms.Resize((128, 128)),
+    transforms.ToTensor(),
+])
+
+dataset = PlayingCardDataset(data_dir, transform)
+
+dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
+
+class SimpleCardClassifier(nn.Module):
+    def __init__(self, num_classes=53):
+        super(SimpleCardClassifier, self).__init__()
+
+        self.base_model = timm.create_model('efficientnet_b0', pretrained=True) 
+        self.features = nn.Sequential(*list(self.base_model.children())[:-1]) 
+        enet_out_size = 1280 
+        self.classifier = nn.Linear(enet_out_size, num_classes) 
+        pass
+
+    def forward(self, x): 
+        x = self.features(x)
+        output = self.classifier(x)
+        return output
